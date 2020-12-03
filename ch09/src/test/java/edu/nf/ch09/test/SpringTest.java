@@ -20,6 +20,7 @@ public class SpringTest {
         System.out.println(controller);
         System.out.println(controller1);
         controller.add();
+        ((ClassPathXmlApplicationContext)context).close();
     }
 }
 
