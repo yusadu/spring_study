@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<!--    &lt;!&ndash;装配dao&ndash;&gt;-->
+<!--    <bean id="userDao" class="edu.nf.ch09.dao.impl.UserDaoImpl" />-->
+
+<!--    &lt;!&ndash;装配service&ndash;&gt;-->
+<!--    <bean id="userService" class="edu.nf.ch09.service.impl.UserServiceImpl">-->
+<!--        &lt;!&ndash;注入UserDao&ndash;&gt;-->
+<!--        <property name="userDao" ref="userDao" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;装配controller&ndash;&gt;-->
+<!--    <bean id="userController" class="edu.nf.ch09.controller.UserController">-->
+<!--        &lt;!&ndash;注入UserService&ndash;&gt;-->
+<!--        <property name="service" ref="userService" />-->
+<!--    </bean>-->
+
+
+    <!--启用注解处理器，这样就可以在代码中使用Spring提供的相关注解-->
+    <context:annotation-config/>
+
+    <!--配置包扫描，也就是扫描那些包下带有注解的类，将其纳入Ioc容器管理-->
+    <!--注意：如果配置了compon-scan，那么就不需要再配置annotation-config，
+    因为comment-scan会自动启用注解处理器-->
+    <context:component-scan base-package="edu.nf.ch09"/>
+</beans>

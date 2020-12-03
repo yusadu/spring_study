@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- init-method指定bean的init方法，destroy-method指定bean的destroy方法 -->
+<!--    <bean id="people" class="edu.nf.ch04.People"  init-method="init" destroy-method="destroy" scope="prototype"/>-->
+
+
+    <!--
+        bean的初始化方法
+        两种方式：
+        1.实现InitializingBean接口，接口中包含一个afterPropertiesSet方法
+        2.在Bean中自定义初始化方法，并在配置文件中通过init-method属性来指定
+        注意：如果InitlaizingBean接口和init-method一起使用，那么先执行InitlaizingBean接口的方法
+        再执行自定义的init方法
+
+        bean的销毁方法
+        两种方式：
+        1.实现DisposableBean接口，此接口包含一个destroy方法
+        2.在Bean中自定义销毁方法，并在配置文件中通过destroy-method属性指定
+        注意：如果两者同时使用，DisposableBean接口先执行，在执行自定义的销毁方法
+
+        生命周期执行顺序：
+        1.构造方法
+        2.InitializingBean的afterPropertiesSet方法
+        3.Init-method指定的方法
+        4.DisposableBean的destroy方法
+        5.destroy-method指定的方法
+     -->
+    <bean id="user" class="edu.nf.ch04.Users" init-method="init" destroy-method="mydestroy" />
+
+    <!-- 配置BeanPostProcessor(BPP) -->
+    <bean class="edu.nf.ch04.processor.MyPostProcessor" />
+
+    <!--当配置了Bean的后处理器，生命周期方法如下：
+        1.构造方法
+        2.后处理器的postProcessBeforeInitialization
+        3.InitializingBean的afterPropertiesSet
+        4.自定义的init-method
+        5.后处理器的postProcessAfterInitalization
+        6.DisposableBean的destroy
+        7.自定义的destroy-method
+    -->
+
+</beans>
