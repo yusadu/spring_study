@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * @author 洒度
@@ -26,9 +27,13 @@ import javax.annotation.PreDestroy;
 @Scope("prototype")
 public class UserController {
 
-    @Autowired
+//    @Autowired
+    //也可以使用@Resource注解来注入，它是javax包下提供的注解
+    //Spring可以支持此注解，name指定要注入的Bean的ID
+    //只能标注在字段以及set方法上，不能标注在构造方法上
+    @Resource(name="stuService")
     //通过@Qualifier指定Bean的id
-    @Qualifier("userService")
+//    @Qualifier("userService")
     private UserService service;
 
 //    /**
