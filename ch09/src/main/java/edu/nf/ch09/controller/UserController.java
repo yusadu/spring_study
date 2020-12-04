@@ -49,7 +49,8 @@ public class UserController {
     //@Autowired注解用于完成注入配置，
     //可以标识在set方法上，构造方法上，字段上
     //注意：当注入的实现类只有一个的时候，Spring会自动找到它并直接注入进来
-    //如果有多个实现类的时候，就必须结合@Qualifier注解一起使用，这个注解的作用是指定要注入哪一个实现类
+    //如果有多个实现类的时候，先根据变量名称作为ID从容器中查找，如果匹配的到，则直接返回
+    // 就必须结合@Qualifier注解一起使用，这个注解的作用是指定要注入哪一个实现类
 //    @Autowired
 //    public void setService(UserService service){
 //        this.service=service;
