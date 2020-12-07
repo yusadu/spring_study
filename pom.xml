@@ -20,6 +20,8 @@
         <module>ch10</module>
         <module>ch11</module>
         <module>ch12</module>
+        <module>ch13</module>
+        <module>ch14</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -45,6 +47,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 </project>
