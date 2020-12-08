@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--装配业务层对象-->
+    <bean id="userService" class="edu.nf.ch15.service.impl.UserServiceImpl"/>
+
+    <!--装配切面-->
+    <bean id="userServiceAspect" class="edu.nf.ch15.aspect.UserServiceAspect"/>
+
+    <!--AOP配置，proxy-target-class设置为true表示强制使用cglib生成代理，默认为false-->
+    <aop:config proxy-target-class="true">
+        <!--配置切入点，Spring使用了AspectJ的切入点表达式来配置切入点,
+            通过切入点表达式可以定位到需要增强的目标方法,这些目标方法就称之为连接点-->
+        <!-- 表达式语法：execution(访问修饰符 [方法返回值类型] 包名.类名.方法名(参数类型))
+            方法参数可以指定参数类型，也可以使用“..”来表示任意类型和个数的参数。
+            execution表达式是切入到方法级别 -->
+        <aop:pointcut id="myPointcut" expression="execution(* edu.nf.ch15.service.impl.UserServiceImpl.*(..))"/>
+        <!--使用within表达式，它是切入到类级别-->
+        <aop:pointcut id="myPointcut2" expression="within(edu.nf.ch15.service.impl.*)"/>
+
+        <!--配置Advisor （通知器，也就是切面），advisor-ref指定切面ID,pointcut-ref指定切入点ID-->
+        <aop:advisor advice-ref="userServiceAspect" pointcut-ref="myPointcut2"/>
+    </aop:config>
+
+
+</beans>
