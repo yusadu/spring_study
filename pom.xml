@@ -25,6 +25,10 @@
         <module>ch15</module>
         <module>ch16</module>
         <module>ch17</module>
+        <module>ch18</module>
+        <module>ch19</module>
+        <module>ch20</module>
+        <module>ch21</module>
     </modules>
     <packaging>pom</packaging>
 

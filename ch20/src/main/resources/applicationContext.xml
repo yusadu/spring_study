@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+    <!--装配业务处理类-->
+    <bean id="taskService" class="edu.nf.ch20.service.impl.TaskServiceImpl"/>
+
+    <!--装配定时任务处理器-->
+    <bean id="demoTask" class="edu.nf.ch20.job.DemoTask">
+        <property name="service" ref="taskService"/>
+    </bean>
+
+    <!--配置定时任务线程池，池中分配两个线程-->
+    <task:scheduler id="scheduler" pool-size="2"/>
+    <!--配置定时任务，引用任务线程池的id-->
+    <task:scheduled-tasks>
+        <task:scheduled ref="demoTask" method="executeBackup" cron="0/40 * * * * ?"/>
+        <task:scheduled ref="demoTask" method="executeClean" cron="0/20 * * * * ?"/>
+    </task:scheduled-tasks>
+</beans>
